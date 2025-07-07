@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Order Summary</title>
+<style>
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: Arial, sans-serif;
+
+}
+.container {
+width: 50%;
+margin: 30px auto;
+background-color: white;
+padding: 25px;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h2 {
+color: #212121;
+border-bottom: 1px solid #ddd;
+padding-bottom: 10px;
+}
+.child{
+display: flex;
+margin-top: 20px;
+}
+.child img {
+width: 200px;
+height: 200px;
+border: 1px solid #ddd;
+margin-right: 20px;
+}
+.details {
+flex: 1;
+}
+.details h3 {
+margin: 0 0 10px;
+}
+.details p {
+margin: 5px 0;
+}
+.price {
+font-size: 16px;
+font-weight: bold;
+color:lightgrey;
+
+
+}
+.place-order {
+margin-top: 20px;
+text-align: right;
+}
+.place-order button {
+padding: 10px 20px;
+background-color: #fb641b;
+color: white;
+border: none;
+border-radius: 4px;
+font-size: 16px;
+cursor: pointer;
+}
+.place-order button:hover {
+background-color: #d35400;
+}
+#quantity {
+width: 50px;
+}
+#totalPrice {
+border: none;
+font-weight: bold;
+font-size: 20px;
+width: 80px;
+}
+p{
+margin:10px 0px;
+}
+
+   .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           
+            background-color: #131921;
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-left .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            z-index:5;
+            
+        }
+
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 0 20px;
+        }
+
+        .search-box {
+            width: 400px;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-button{ 
+            padding: 8px 12px;
+            background-color: #febd69;
+            border: none; 
+            border-radius: 6px;
+            cursor: pointer;
+            color:black;
+        }
+
+        .search-button:hover {
+            background-color: #f3a847;
+        }
+
+        .navbar-right a { 
+            margin-left: 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-right a:hover { 
+            color: #febd69;
+        }
+
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left"> 
+    
+    
+    <a href="productspage"> <div> 
+        <div class="c"></div>
+        <div class="c"></div>
+        <div class="c"></div>
+    </div> </a>
+      
+      <h4 th:text="${admin}"></h4>  
+    </div>
+    <div class="navbar-center">
+        <input type="text" placeholder="Search for products..." class="search-box">
+        <input class="search-button" value="search" readonly="readonly"></input> 
+    </div>
+    <div class="navbar-right">
+        <a href="">Home</a> 
+        <a href="">Orders</a>
+        <a href="">Cart🛒</a>  
+        <a href="loginpage">Login</a>     
+    </div>
+</nav>
+
+
+
+
+
+<div class="container">
+<h2>Order Summary</h2>
+
+<p>Deliver to: <h4 th:text="${email}"></h4></p>   
+
+<div class="child">
+<img th:src="@{'/images/' + ${pay.image}}" >
+<div class="details">
+<h3 th:text="${pay.productname}">Product Name</h3>
+<p><strong>Brand:</strong> <span th:text="${pay.productbrand}">Brand</span></p>
+<p><strong>Category:</strong> <span th:text="${pay.productcategory}">Category</span></p>
+<p><strong>Discount:</strong> <span id="discount" th:text="${pay.discount}">0</span>%</p>
+
+<p class="price"><del>Price: ₹<span id="price" th:text="${pay.price}">0</span></del></p>
+
+<p><strong>Quantity:</strong>
+<input type="number" id="quantity" oninput="calculateTotal()">
+</p>
+
+<p><strong>Total Price:</strong> ₹<input id="totalPrice" readonly></p>
+
+<form action="insertorder"> 
+<input type="hidden" th:value="${pay.productid}" name="cid"> 
+<input type="hidden" name="price" id="hiddenTotalPrice" th:value="${total}"> 
+<input type="submit" value="Continue">
+</form>
+</div>
+</div>
+</div>
+
+<script>
+function calculateTotal() {
+    let p = parseInt(document.getElementById("price").innerText) || 0;
+    let d = parseInt(document.getElementById("discount").innerText) || 0;
+    let q = parseInt(document.getElementById("quantity").value) || 0;
+
+    let b = p * (d / 100);
+    let total = (p - b) * q;
+
+    document.getElementById("totalPrice").value = total;
+    document.getElementById("hiddenTotalPrice").value = total;
+} 
+</script>
+ 
+</body>
+
+
+</html>
+
+ 

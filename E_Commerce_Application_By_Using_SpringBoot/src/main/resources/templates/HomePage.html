@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Listing</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+        body {
+           font-family: Arial, sans-serif;
+           
+        }
+
+  
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           
+            background-color: #131921;
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-left .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            z-index:5;
+            
+        }
+
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 0 20px;
+        }
+
+        .search-box {
+            width: 400px;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-button{ 
+            padding: 8px 12px;
+            background-color: #febd69;
+            border: none; 
+            border-radius: 6px;
+            cursor: pointer;
+            color:black;
+        }
+
+        .search-button:hover {
+            background-color: #f3a847;
+        }
+
+        .navbar-right a {
+            margin-left: 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-right a:hover { 
+            color: #febd69;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+       .product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 40px;
+}
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius:9px;
+            width: 280px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+         
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-detail {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .button-container {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 8px;
+            font-size: 15px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+           
+        }
+
+        .btn-cart {
+            background-color: #28a745; 
+            color: white;
+        }
+
+        .btn-cart:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-buy {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-buy:hover {
+            background-color: #0069d9;
+            transform: scale(1.05);
+        }
+        .buy{
+        padding:0px 25px; 
+        height:40px;
+        background-color: blue;
+        border-radius: 7px;
+        border:none;
+        color:white;
+        font-size: 15px;
+        
+        }
+        h4{
+        
+        font-weight: bold;
+        margin-left: 150px;
+     
+        }
+        .c{
+        width:25px;
+        height: 4px;
+        background-color: white;
+       margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left"> 
+    
+    
+    <a href="productspage"> <div> 
+        <div class="c"></div>
+        <div class="c"></div>
+        <div class="c"></div>
+    </div> </a>
+      
+      <h4 th:text="${admin}"></h4>  
+    </div>
+    <div class="navbar-center">
+        <input type="text" placeholder="Search for products..." class="search-box">
+        <input class="search-button" value="search" readonly="readonly"></input> 
+    </div>
+    <div class="navbar-right">
+        <a href="">Home</a> 
+        <a href="">Orders</a>
+        <a href="">Cart🛒</a>  
+        <a href="loginpage">Login</a>     
+    </div>
+</nav>
+<div class="product-container">
+    <div class="product-card" th:each="p : ${products}">
+        <img th:src="@{'/images/' + ${p.image}}" alt="Product Image" width="100%" height="180">  
+        <div class="product-title" th:text="${p.productname}">Product Name</div>
+        <div class="product-detail"><strong>Brand:</strong> <span th:text="${p.productbrand}"></span></div>
+        <div class="product-detail"><strong>Category:</strong> <span th:text="${p.productcategory}"></span></div>
+        <div class="product-detail"><strong>Price:</strong> ₹<span th:text="${p.price}"></span></div>
+        <div class="product-detail"><strong>Discount:</strong> <span th:text="${p.discount}"></span>%</div>
+        <div class="product-detail"><strong>Quantity:</strong> <span th:text="${p.quantity}"></span></div>
+        <div class="button-container">
+            <button class="btn btn-cart">Add to Cart</button> 
+            
+     <form action="order">
+    <input type="hidden"  name="id" th:value="${p.productid}">
+ 
+    <input type="submit" value="Buy now" class="buy"> 
+</form>
+            
+        </div> 
+    </div>
+</div>
+
+</body>
+</html>        

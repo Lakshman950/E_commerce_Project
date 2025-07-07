@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: linear-gradient(200deg,rgba(237, 140, 105,0.6),bisque);
+             
+            background-repeat: no-repeat;
+            height:730px;
+            font-family:arial;
+
+            
+        }
+        form{
+            width: 380px;
+            height: 560px;
+            display: block;
+            margin: 60px auto;
+        
+            padding: 30px 30px ;
+            background-color:white;
+            border-radius: 9px;
+           box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+    
+        }
+        input{
+            width: 100%;
+            border-radius: 9px; 
+            margin-bottom: 20px;
+            padding: 9px; 
+            border:  1.5px solid lightgrey;
+        
+
+        }
+        h1{
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+     
+
+.button-62 {
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  color: white;
+  margin-top: 25px;
+ padding: 9px;
+}
+.button-62:hover{ 
+
+box-shadow: 0px 0px 30px  #FF9A5A;
+}
+
+
+
+      
+        
+    </style>
+</head>
+<body>
+
+    
+     <h1>SignUp Page 🛒</h1>  
+
+    <form action="signup"> 
+    
+        
+        <label>Full Name</label>
+        <input type="text"  name="customername" ><br>
+        <label for="">Email</label>
+        <input type="text" name="customeremailid" required ><br>
+        <label for="">Phone Number</label>
+        <input type="text"  name="mobilenumber" required><br>
+        <label >Password</label>
+        <input type="text"  name="password" required><br>
+        <label for="">Address</label>
+        <input type="text" name="address" required><br> 
+        <label for="">Gender</label>
+        <input type="text" name="gender" required><br>
+        
+        <input type="submit" value="SignUp" class="button-62"><br> 
+
+    </form>
+
+
+   <h1 th:text="${exception}"></h1>
+    
+</body>
+</html>
+
+
+
+
+
+
+    
+     
+  
+  

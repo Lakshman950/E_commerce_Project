@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Manage Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #218838;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Manage Products</h1>
+    <form action="insert" method="post">
+        <input type="text" name="productname" placeholder="Product Name" required><br>
+        <input type="text" name="productbrand" placeholder="Product Brand" required><br>
+        <input type="text" name="productcategory" placeholder="Product Category" required><br>
+        <input type="number"  name="price" placeholder="Price" required><br>
+        <input type="number"  name="discount" placeholder="Discount %" required><br>
+        <input type="number" name="quantity" placeholder="Quantity" required><br>
+        <input type="text" name="image" placeholder="Image Path / URL" required><br>
+
+        <input type="submit" value="Add Product">
+    </form>
+</div>
+
+</body>
+</html>
